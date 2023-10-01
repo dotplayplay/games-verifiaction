@@ -1,5 +1,37 @@
 <script>
+import { page } from "$app/stores";
+let urlString =    ($page.url.href);
+let paramString = urlString.split('?')[1];
+let queryString = new URLSearchParams(paramString);
+import { onMount } from "svelte";
+import axios  from "axios"
+import { handleResult } from "./store"
 
+let seaser = []
+
+for (let pair of queryString.entries()) {
+    seaser.push(pair[1])
+}
+
+let server_seed = seaser[0]
+let client_seed = seaser[1]
+let none = seaser[2]
+
+
+const handleFetch = (async()=>{
+    try{
+        await axios.get(`http://localhost:8000/admin/verify/Verify-dice?s=${server_seed}&c=${client_seed}&me=${none}`)
+        .then((res)=>{
+            handleResult.set(res.data.result)
+        })
+    }catch(err){
+        alert(err)
+    }
+})
+
+onMount(async()=>{
+    handleFetch()
+})
 </script>
 
 <div id="app" class="main">
@@ -9,16 +41,16 @@
     <form class="py-5">
         <h2 class="text-center">Input</h2>
         <div class="form-group">
-            <input placeholder="Client Seed" class="form-control">
+            <input placeholder="Client Seed" bind:value={client_seed} class="form-control">
         </div>
         <div class="form-group">
-            <input placeholder="Server Seed" class="form-control">
+            <input placeholder="Server Seed" bind:value={server_seed} class="form-control">
         </div>
         <div class="form-group">
             <input placeholder="Server Seed Hash" class="form-control">
         </div>
         <div class="form-group">
-            <input placeholder="Nonce" class="form-control">
+            <input placeholder="Nonce" bind:value={none} class="form-control">
         </div>
     </form>
 
@@ -28,10 +60,10 @@
         <h2 class="text-center pb-5">Output</h2>
         <div class="form-group">
             <div>sha256(server_seed)</div>
-            <input readonly class="form-control">
+            <input readonly value="a356ee6b9467299864e7ccf63233740a386556e2aff3cd2caef0d8f394d35ac3" class="form-control">
         </div> <div class="form-group">
             <div>hmac_sha256(client_seed:nonce, server_seed)</div>
-            <input readonly class="form-control">
+            <input value="36e198595c71d7c874a4c755da91ccc029cccc9fc2bfcfdaa1e04445921c657e" readonly class="form-control">
         </div>
     </form>
     <hr>
@@ -96,8 +128,8 @@
         <h5>Bytes to Number</h5>
         <div class="form-group">
             (18, 212, 194, 55) -&gt; [0, ... 4] =
-            <span class="text-success">7.35</span>
-            <div><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            <span class="text-success">{$handleResult.point}</span>
+            <!-- <div><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
                 <span> 0.070312500&nbsp;&nbsp;&nbsp;&nbsp;</span>
                 <span>(18 / (256 ^ 1))</span>
             </div>
@@ -118,9 +150,9 @@
                 <span>0.073558939&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>(* 10001 / 100)</div>
             <div>
                 <span>=&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                <span class="text-success">7.356629489</span>
-            </div>
-        </div>
+                <span class="text-success">{$handleResult.point}</span>
+            </div> -->
+        <!-- </div> -->
     </form>
 </div>
 
