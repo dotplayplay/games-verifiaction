@@ -42,8 +42,8 @@
   const handleSeedChange = () => {
     // @ts-ignore
     if (timeout) clearTimeout(timeout);
+    
     timeout = setTimeout(() => {
-      console.log("On Change");
       const _hash = String(CryptoJS.HmacSHA256(clientSeed, serverSeed));
       const balls = getBalls(_hash);
       numbers = balls.slice(0, 5).join(", ");
