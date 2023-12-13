@@ -9,6 +9,8 @@
   $: jackpot = "";
   $: numbers = "";
 
+  
+
   // @ts-ignore
   function getRandomByHash(_hash) {
     return (
@@ -42,7 +44,7 @@
   const handleSeedChange = () => {
     // @ts-ignore
     if (timeout) clearTimeout(timeout);
-    
+
     timeout = setTimeout(() => {
       const _hash = String(CryptoJS.HmacSHA256(clientSeed, serverSeed));
       const balls = getBalls(_hash);
