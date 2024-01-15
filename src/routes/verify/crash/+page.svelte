@@ -16,8 +16,8 @@ import {
     page
 } from '$app/stores'
 
-$: hash = ''
-const salt = "Qede00000000000w00wd001bw4dc6a1e86083f95500b096231436e9b25cbdd0075c4"
+let hash = ''
+let salt = "Qede00000000000w00wd001bw4dc6a1e86083f95500b096231436e9b25cbdd0075c4"
 let number = 10
 let errrr = ''
 
@@ -44,7 +44,7 @@ $: {
 
 <div class="section">
     <div class="container">
-        <h1 class="title">90 - Game Verification Script</h1>
+        <h1 class="title">Crash - Game Verification Script</h1>
         <h2 class="subtitle">Third party script used to verify games on crash game.</h2>
     </div>
     <hr>
