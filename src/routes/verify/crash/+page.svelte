@@ -44,7 +44,7 @@ $: {
 
 <div class="section">
     <div class="container">
-        <h1 class="title">Crash - Game Verification Script</h1>
+        <h1 class="title">90 - Game Verification Script</h1>
         <h2 class="subtitle">Third party script used to verify games on crash game.</h2>
     </div>
     <hr>
