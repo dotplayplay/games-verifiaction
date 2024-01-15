@@ -7,7 +7,7 @@ export const useCrashverification = () => {
       isLoading = true
       error = null
       const response = await fetch(
-        "http://localhost:8000/admin/verify/crash-history",{
+        "https://dpp-f82256e6e6d2.herokuapp.com/admin/verify/crash-history",{
           method: "POST",
           body: JSON.stringify(data),
           headers: {
