@@ -16,10 +16,9 @@ import {
     page
 } from '$app/stores'
 
-let hash = ''
-let salt = '0000000000000000001b34dc6a1e86083f95500b096231436e9b25cbdd0075c4'
+$: hash = ''
+const salt = "Qede00000000000w00wd001bw4dc6a1e86083f95500b096231436e9b25cbdd0075c4"
 let number = 10
-
 let errrr = ''
 
 const handleSubmit = (() => {
